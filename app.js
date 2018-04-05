@@ -4,6 +4,7 @@ var express = require('express'),
 var db = mongoose.connect('mongodb://localhost/libraryApi');
 
 var cors = require('cors');
+var bodyParser = require('body-parser');
 
 var Book = require('./models/bookModel');
 
@@ -14,6 +15,10 @@ var port = process.env.PORT || 3000;
 var libraryRouter = express.Router();
 
 app.use(cors());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 
 libraryRouter.route('/Library')
   .post(function(req, res) {
@@ -23,6 +28,14 @@ libraryRouter.route('/Library')
       });
     })
     res.status(200).send("all books added")
+  });
+
+
+libraryRouter.post('/Book', function(req, res) {
+    console.log("book added");
+    Book.create(req.body, function() {
+      res.status(200).send("book added")
+    });
   });
 
 libraryRouter.route('/Library')
