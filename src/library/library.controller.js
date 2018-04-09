@@ -1,4 +1,5 @@
 const Book = require('../common/book.model');
+const library = require('../common/library.json')
 
 class libraryController {
 
@@ -12,7 +13,8 @@ class libraryController {
   }
 
   static uploadLibrary(req, res) {
-    library.forEach(book => {
+    console.log(library);
+    library.books.forEach(book => {
       Book.create(book, function() {
         console.log("book added");
       });

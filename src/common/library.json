@@ -1,5 +1,5 @@
 {
-    "library": [
+    "books": [
         {
             "bookId": "building-microservices",
             "title": "Building Microservices",

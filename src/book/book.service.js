@@ -5,7 +5,6 @@ class bookService {
   }
 
   static generateId(book) {
-    console.log('inservice', book.title);
     return this.replaceAll(book.title, ' ', '-');
   };
 }
