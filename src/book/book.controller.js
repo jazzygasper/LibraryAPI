@@ -5,10 +5,12 @@ class BookController {
 
   static addBook(req, res) {
     req.body.bookId = req.body.bookId || Service.generateId(req.body);
+    req.body.amazonLink = req.body.amazonLink || 'https://www.amazon.co.uk/';
+    req.body.coverUrl = req.body.coverUrl || 'https://genderstudies.indiana.edu/images/publications/book-cover-placeholder.jpg';
     console.log("book added");
     Book.create(req.body)
     .then(() => {
-      res.status(200).send("book added");
+      res.status(200).send(req.body);
     })
     .catch((err) => {
       console.log(err);
@@ -20,7 +22,7 @@ class BookController {
     console.log("book updated");
     Book.update({bookId: req.params.bookId}, req.body)
     .then(() => {
-      res.status(200).send("book updated");
+      res.status(200).send(req.body);
     })
     .catch((err) => {
       console.log(err);
@@ -29,7 +31,7 @@ class BookController {
 
   static deleteBook(req, res) {
     Book.remove({bookId: req.params.bookId}, function () {
-      res.status(200).send("book deleted")
+      res.status(200).send(req.body);
     })
   }
 }
